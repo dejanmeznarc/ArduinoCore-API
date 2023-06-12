@@ -124,7 +124,7 @@ class Stream : public Print
   float parseFloat(char ignore) { return parseFloat(SKIP_ALL, ignore); }
   // These overload exists for compatibility with any class that has derived
   // Stream and used parseFloat/Int with a custom ignore character. To keep
-  // the public API simple, these overload remains protected.
+  // the public API simple, these overload remains protected.jao
 
 
 };
