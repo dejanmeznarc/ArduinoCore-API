@@ -67,7 +67,7 @@ class Stream : public Print
 
   void setTimeout(unsigned long timeout);  // sets maximum milliseconds to wait for stream data, default is 1 second
   unsigned long getTimeout(void) { return _timeout; }
-  
+
   bool find(const char *target);   // reads data from the stream until the target string is found
   bool find(const uint8_t *target) { return find ((const char *)target); }
   // returns true if target string is found, false if timed out (see setTimeout)
@@ -108,22 +108,25 @@ class Stream : public Print
   String readString();
   String readStringUntil(char terminator);
 
-  protected:
-  long parseInt(char ignore) { return parseInt(SKIP_ALL, ignore); }
-  float parseFloat(char ignore) { return parseFloat(SKIP_ALL, ignore); }
-  // These overload exists for compatibility with any class that has derived
-  // Stream and used parseFloat/Int with a custom ignore character. To keep
-  // the public API simple, these overload remains protected.
 
   struct MultiTarget {
-    const char *str;  // string you're searching for
-    size_t len;       // length of string you're searching for
-    size_t index;     // index used by the search routine.
+      const char *str;  // string you're searching for
+      size_t len;       // length of string you're searching for
+      size_t index;     // index used by the search routine.
   };
 
   // This allows you to search for an arbitrary number of strings.
   // Returns index of the target that is found first or -1 if timeout occurs.
   int findMulti(struct MultiTarget *targets, int tCount);
+
+  protected:
+  long parseInt(char ignore) { return parseInt(SKIP_ALL, ignore); }
+  float parseFloat(char ignore) { return parseFloat(SKIP_ALL, ignore); }
+  // These overload exists for compatibility with any class that has derived
+  // Stream and used parseFloat/Int with a custom ignore character. To keep
+  // the public API simple, these overload remains protected.jao
+
+
 };
 
 #undef NO_IGNORE_CHAR
